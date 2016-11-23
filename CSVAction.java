@@ -2,7 +2,7 @@
 import java.awt.event.ActionEvent;
 // import javax.swing.Action;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 // import javax.swing.text.Keymap;
 // import javax.swing.text.DefaultEditorKit;
 // import javax.swing.KeyStroke;
@@ -33,7 +33,7 @@ public abstract class CSVAction extends DefaultAction {
     protected CSVAction(String name) {
 	super(name);
     } // end constructor CSVAction
-    
+
     /**
      * Perform some appropriate change on a selected region of CSV;
      *    subclasses must implement this method. If
@@ -41,10 +41,12 @@ public abstract class CSVAction extends DefaultAction {
      * do nothing (as in capitalization) or might affect the character before
      * the start or after the end (as in using a delete or backspace key).
      * @param con CSV document to change.
-     * @param start Index of the first character to change.
-     * @param end Index one beyond the last character to change.
+     * @param start row of the section to change.
+     * @param start col of the section to change.
+     * @param end row of the section to change.
+     * @param end col of the section to change.
      */
-    protected abstract void changeCSV(CSVContents con, int start, int end);
+    protected abstract void changeCSV(CSVContents con, int row, int col);
 
     /**
      * Perform the appropriate action (defined by {@link #changeCSV}) on the
@@ -54,13 +56,15 @@ public abstract class CSVAction extends DefaultAction {
 	try {
 	    Application app = Application.getApplication();
 	    CommonWindow win = app.getActiveWindow();
-	    JTextArea area = (JTextArea) ((JScrollPane) win.getContentPane()).getViewport().getView();
+	    JTable table = (JTable) ((JScrollPane) win.getContentPane()).getViewport().getView();
 	    // if (firstArea==null) setArea(area);
-	    TextDocument doc = (TextDocument) app.getActiveDocument();
-	    TextContents con = (TextContents) doc.getContents();
-	    int start = area.getSelectionStart();
-	    int end = area.getSelectionEnd();
-	    changeText(con,start,end);
+	    CSVDocument doc = (CSVDocument) app.getActiveDocument();
+	    CSVContents con = (CSVContents) doc.getContents();
+	    int row = doc.mouseRowLocation;
+	    int col = doc.mouseColLocation;
+
+	    changeCSV(con,row,col);
+	    doc.loadWindowWithContent();
 	} catch (Exception ex) {
 	    Log.error("Text action error: "+ex.getLocalizedMessage());
 	}
