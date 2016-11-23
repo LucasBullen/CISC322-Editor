@@ -25,38 +25,18 @@ public class CSVDocument
     implements javax.swing.event.DocumentListener
 {
     private CSVContents contents;
-    private RightClickMenu menu;
-    public int mouseRowLocation;
-    public int mouseColLocation;
 
     /**
      * Constructs a document representation.
      * @param type The type of the document.
      */
-    public CSVDocument(CSVType type) {
+    public CSVDocument(DocumentType type) {
 	super(type);
-    menu = type.getRightClickMenu();
 	contents = new CSVContents();
 	contents.addDocumentListener(this);
     //Adds the JTable to the window with current table information
-    loadWindowWithContent();
+    window = new JScrollPane(new JTable(contents.dftTbl));
     } // end CSVDocument
-
-    public void loadWindowWithContent(){
-        JTable csvTable = new JTable(contents.dftTbl);
-        csvTable.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            mouseRowLocation = csvTable.rowAtPoint(evt.getPoint());
-            mouseColLocation = csvTable.columnAtPoint(evt.getPoint());
-            if (mouseRowLocation >= 0 && mouseColLocation >= 0) {
-                //we clicked a square
-                menu.show(evt.getComponent(), evt.getX(), evt.getY());
-            }
-         }
-        });
-        window = new JScrollPane(csvTable);
-    }
 
     // CSV document change listeners: all invoke the framework's own document
     // change listeners.
@@ -67,7 +47,6 @@ public class CSVDocument
     public void changedUpdate(javax.swing.event.DocumentEvent e) {
 	setChanged();
     } // end changedUpdate
-
 
     /**
      * Gives notification that there was an insert into the document.
@@ -119,8 +98,8 @@ public class CSVDocument
     {
 	    contents.open(in);
         //Adds the JTable to the window with current table information
-        loadWindowWithContent();
-	    setChanged(false);
+        window = new JScrollPane(new JTable(contents.dftTbl));
+	   setChanged(false);
     } // open
 
     /**
