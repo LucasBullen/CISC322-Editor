@@ -13,5 +13,6 @@ class StatisticsAction extends CSVAction {
      */
     protected void changeCSV(CSVContents con, int row, int col) {
 		System.out.println("changeText:"+row+","+col);
+        con.dftTbl.setValueAt("cheese", row, col);
     } // end changeText
 } // end class UpCaseAction

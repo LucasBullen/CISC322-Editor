@@ -64,6 +64,7 @@ public abstract class CSVAction extends DefaultAction {
 	    int col = doc.mouseColLocation;
 
 	    changeCSV(con,row,col);
+	    doc.loadWindowWithContent();
 	} catch (Exception ex) {
 	    Log.error("Text action error: "+ex.getLocalizedMessage());
 	}

@@ -39,10 +39,10 @@ public class CSVDocument
 	contents = new CSVContents();
 	contents.addDocumentListener(this);
     //Adds the JTable to the window with current table information
-    window = new JScrollPane(createJTableFromContent());
+    loadWindowWithContent();
     } // end CSVDocument
 
-    private JTable createJTableFromContent(){
+    public void loadWindowWithContent(){
         JTable csvTable = new JTable(contents.dftTbl);
         csvTable.addMouseListener(new java.awt.event.MouseAdapter() {
         @Override
@@ -55,7 +55,7 @@ public class CSVDocument
             }
          }
         });
-        return csvTable;
+        window = new JScrollPane(csvTable);
     }
 
     // CSV document change listeners: all invoke the framework's own document
@@ -119,7 +119,7 @@ public class CSVDocument
     {
 	    contents.open(in);
         //Adds the JTable to the window with current table information
-        window = new JScrollPane(createJTableFromContent());
+        loadWindowWithContent();
 	    setChanged(false);
     } // open
 
