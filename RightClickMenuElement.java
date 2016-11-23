@@ -1,0 +1,3 @@
+class RightClickMenuElement extends JMenuItem{
+	
+}
