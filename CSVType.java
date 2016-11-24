@@ -8,6 +8,7 @@ import javax.swing.text.JTextComponent;
 import javax.swing.text.Keymap;
 import javax.swing.JScrollPane;
 import javax.swing.text.DefaultEditorKit;
+import javax.swing.JPopupMenu;
 // import javax.swing.KeyStroke;
 import ca.queensu.cs.dal.edfmwk.act.DefaultAction;
 import ca.queensu.cs.dal.edfmwk.doc.Document;
@@ -160,15 +161,35 @@ public class CSVType implements DocumentType {
 	if (menu==null) {
 	    menu = new MenuDescriptor();
 	    try {
-		// menu.addElement(new MenuElement("Edit/Capitalize", new CapitalizeAction()));
-		// menu.addElement(new MenuElement("Edit/Delete", new DeleteAction()));
-		// menu.addElement(new MenuElement("Edit/Lower Case", new DownCaseAction()));
-		// menu.addElement(new MenuElement("Edit/Upper Case", new UpCaseAction()));
-	    } catch (Exception e) {
+		menu.addElement(new MenuElement("Edit/Remove Duplicate Rows", new RemoveDuplicateRowsAction()));
+		} catch (Exception e) {
 		Log.internalError("Menu element error "+e.getLocalizedMessage());
 	    }
 	}
 	return menu;
+    }
+
+    public RightClickMenu getRightClickMenu(){
+        RightClickMenu menu = new RightClickMenu();
+        //moving col/row
+        //TODO: implement and uncomment
+        menu.addElement(new StatisticsAction());
+        /*menu.addElement(new MenuElement("Move Column Right",
+            new MoveAction("col","right")));
+        menu.addElement(new MenuElement("Move Column Left",
+            new MoveAction("col","left")));
+        menu.addElement(new MenuElement("Move Row Up",
+            new MoveAction("row","up")));
+        menu.addElement(new MenuElement("Move Row Down",
+            new MoveAction("row","down")));
+        //show row statistics
+        menu.addElement(new MenuElement("Column statistics",
+            new StatisticsAction()));
+        //sort rows by column
+        menu.addElement(new MenuElement("Sort Rows By Column",
+            new SortAction()));*/
+
+        return menu;
     }
 
     /**
