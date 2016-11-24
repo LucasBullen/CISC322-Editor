@@ -171,24 +171,7 @@ public class CSVType implements DocumentType {
 
     public RightClickMenu getRightClickMenu(){
         RightClickMenu menu = new RightClickMenu();
-        //moving col/row
-        //TODO: implement and uncomment
         menu.addElement(new StatisticsAction());
-        /*menu.addElement(new MenuElement("Move Column Right",
-            new MoveAction("col","right")));
-        menu.addElement(new MenuElement("Move Column Left",
-            new MoveAction("col","left")));
-        menu.addElement(new MenuElement("Move Row Up",
-            new MoveAction("row","up")));
-        menu.addElement(new MenuElement("Move Row Down",
-            new MoveAction("row","down")));
-        //show row statistics
-        menu.addElement(new MenuElement("Column statistics",
-            new StatisticsAction()));
-        //sort rows by column
-        menu.addElement(new MenuElement("Sort Rows By Column",
-            new SortAction()));*/
-
         return menu;
     }
 

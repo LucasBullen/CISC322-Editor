@@ -7,15 +7,13 @@ class StatisticsAction extends CSVAction {
     } // end constructor UpCaseAction
 
     /**
-     * Convert the text in a given range of the document to upper case.
-     * Does nothing if the start and end indices are equal.
-     * @param con Text to change.
-     * @param start Index of the first character to change (the one to be
-     *  capitalized).
-     * @param end Index one beyond the last character to change.
+     * Creates an Message Dialog Box showing statistics for
+     * the selected column. Must be only numeric values
+     * @param con CSV to analyze.
+     * @param row clicked, unused.
+     * @param column clicked, used as the column to be analyzed.
      */
     protected void changeCSV(CSVContents con, int row, int col) {
-		System.out.println("changeText:"+row+","+col);
         DefaultTableModel table = con.dftTbl;
         int rows = table.getRowCount();
         float[] rowData = new float[rows];
@@ -57,6 +55,11 @@ class StatisticsAction extends CSVAction {
         con.dftTbl = table;
     } // end changeText
 
+    /*
+    * Analyzes a string to see if it is in a numeric format,
+    * if so True is returned, otherwise False.
+    * @param String to be analyzed
+    */
     private boolean isNumeric(String str)
     {
       return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.

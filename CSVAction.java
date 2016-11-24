@@ -57,14 +57,14 @@ public abstract class CSVAction extends DefaultAction {
 	    Application app = Application.getApplication();
 	    CommonWindow win = app.getActiveWindow();
 	    JTable table = (JTable) ((JScrollPane) win.getContentPane()).getViewport().getView();
-	    // if (firstArea==null) setArea(area);
+
 	    CSVDocument doc = (CSVDocument) app.getActiveDocument();
 	    CSVContents con = (CSVContents) doc.getContents();
 	    int row = doc.mouseRowLocation;
 	    int col = doc.mouseColLocation;
 
 	    changeCSV(con,row,col);
-	    doc.loadWindowWithContent();
+	    doc.loadWindowWithContent();//updates the visuals for any changes
 	} catch (Exception ex) {
 	    Log.error("Text action error: "+ex.getLocalizedMessage());
 	}

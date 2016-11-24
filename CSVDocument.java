@@ -42,6 +42,10 @@ public class CSVDocument
     loadWindowWithContent();
     } // end CSVDocument
 
+    /**
+    * Function to load the window with the content of the
+    * DefaultTableModel within the CSVContent.
+    */
     public void loadWindowWithContent(){
         JTable csvTable = new JTable(contents.dftTbl);
         csvTable.addMouseListener(new java.awt.event.MouseAdapter() {

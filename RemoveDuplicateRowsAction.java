@@ -8,12 +8,11 @@ class RemoveDuplicateRowsAction extends CSVAction {
     } // end constructor UpCaseAction
 
     /**
-     * Convert the text in a given range of the document to upper case.
-     * Does nothing if the start and end indices are equal.
-     * @param con Text to change.
-     * @param start Index of the first character to change (the one to be
-     *  capitalized).
-     * @param end Index one beyond the last character to change.
+     * Removes all duplicate rows from a csv file, keeping
+     * the first occurnace of a row.
+     * @param con CSV to change.
+     * @param 0
+     * @param 0.
      */
     protected void changeCSV(CSVContents con, int r, int c) {
         DefaultTableModel table = con.dftTbl;
