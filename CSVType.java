@@ -161,7 +161,7 @@ public class CSVType implements DocumentType {
 	if (menu==null) {
 	    menu = new MenuDescriptor();
 	    try {
-		//menu.addElement(new MenuElement("Edit/Pivot", new PivotAction()));
+		menu.addElement(new MenuElement("Edit/Remove Duplicate Rows", new RemoveDuplicateRowsAction()));
 		} catch (Exception e) {
 		Log.internalError("Menu element error "+e.getLocalizedMessage());
 	    }
